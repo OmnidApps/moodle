@@ -1,0 +1,17 @@
+version: "3.9"
+services:
+  webserver:
+    image: "moodlehq/moodle-php-apache:7.4"
+    depends_on:
+      - db
+    volumes:
+      - ./moodle:/var/www/html:cached
+    ports:
+      - 8100:80
+    env_file: .env
+  db:
+    image: postgres:12
+    environment:
+      POSTGRES_USER: moodle
+      POSTGRES_PASSWORD: "m@0dl3ing"
+      POSTGRES_DB: moodle
